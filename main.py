@@ -6,17 +6,7 @@ configs = Properties()
 with open('properties', 'rb') as config_file:
     configs.load(config_file)
 
-
-# Add your key and endpoint
-key = configs.get("key").data
-endpoint = "https://api.cognitive.microsofttranslator.com"
-
-# location, also known as region.
-# required if you're using a multi-service or regional (not global) resource. It can be found in the Azure portal on the Keys and Endpoint page.
-location = configs.get("location").data
-
-path = '/translate'
-constructed_url = endpoint + path
+constructed_url = "https://api.cognitive.microsofttranslator.com/translate"
 
 params = {
     'api-version': '3.0',
@@ -25,9 +15,9 @@ params = {
 }
 
 headers = {
-    'Ocp-Apim-Subscription-Key': key,
+    'Ocp-Apim-Subscription-Key': configs.get("key").data,
     # location required if you're using a multi-service or regional (not global) resource.
-    'Ocp-Apim-Subscription-Region': location,
+    'Ocp-Apim-Subscription-Region': configs.get("location").data,
     'Content-type': 'application/json',
     'X-ClientTraceId': str(uuid.uuid4())
 }
