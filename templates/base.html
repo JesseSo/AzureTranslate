@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+
+        {% if 'audio_url' in session %}
+        <audio controls>
+          <source src="{{ session['audio_url'] }}" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+        {% endif %}
+    </div>
+</body>
+</html>

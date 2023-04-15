@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Translation Application{% endblock %}
+
+{% block content %}
+    <h1>Translation App</h1>
+    <form method="POST" action="/">
+        <label for="input_text">Enter text to translate:</label><br>
+        <textarea id="input_text" name="input_text" rows="5" cols="50" style="resize: none;"></textarea><br>
+
+        <label for="source_lang">Source language:</label>
+        <select id="source_lang" name="source_lang">
+            <option value="en" selected>English</option>
+            <option value="fi">Finnish</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
+        </select>
+
+        <label for="target_lang">Target language:</label>
+        <select id="target_lang" name="target_lang">
+            <option value="fi" selected>Finnish</option>
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
+        </select>
+
+        <input type="submit" value="Translate"><br><br>
+
+        <label for="translated_text">Translated text:</label><br>
+        <textarea id="translated_text" name="translated_text" rows="5" cols="50" style="resize: none;" readonly>{{ translated_text }}</textarea><br>
+        
+        {% if translated_text %}
+            <button type="submit" formaction="{{ url_for('generate_audio') }}">Text to speech</button>
+        {% endif %}
+
+    </form>
+{% endblock %}
