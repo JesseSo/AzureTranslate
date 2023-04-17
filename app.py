@@ -1,6 +1,4 @@
-import requests
-import os
-import base64
+import requests, os, base64, logging
 import azure.cognitiveservices.speech as speechsdk
 from flask import Flask, render_template, request, session, redirect, url_for
 
@@ -59,11 +57,13 @@ def translate():
 
     return render_template('form.html', translated_text=translated_text, audio_url=audio_url, target_lang=target_lang)
 
-
 @app.route('/generate_audio', methods=['POST'])
 def generate_audio():
+    logging.info("Generating audio...")
+    
     translated_text = session.get('translated_text', '')
-    print("Translated text: " + translated_text)
+    logging.info("Translated text: %s", translated_text)
+    
     if not translated_text:
         return redirect(url_for('translate'))
 
@@ -87,10 +87,8 @@ def generate_audio():
         voice = 'en-US-JessaNeural' # Default to English (US)
 
     speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=region)
-    audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
     speech_config.speech_synthesis_voice_name = voice
-    synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
-
+    synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config)
     result = synthesizer.speak_text_async(translated_text).get()
 
     if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
@@ -98,11 +96,14 @@ def generate_audio():
         audio_url = "data:audio/mp3;base64," + audio_data
         session['audio_url'] = audio_url  # Store the audio URL in the session
         session['voice'] = voice  # Store the selected voice in the session
+        logging.info("Audio generated successfully.")
     else:
+        logging.error("Error synthesizing audio: %s", result)
         print("Error synthesizing audio: {}".format(result))
 
     return redirect(url_for('translate'))
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     app.run(debug=True)
