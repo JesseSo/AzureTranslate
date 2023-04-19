@@ -31,9 +31,14 @@
         <label for="translated_text">Translated text:</label><br>
         <textarea id="translated_text" name="translated_text" rows="5" cols="50" style="resize: none;" readonly>{{ translated_text }}</textarea><br>
         
-        {% if translated_text %}
-            <button type="submit" formaction="{{ url_for('generate_audio') }}">Text to speech</button>
-        {% endif %}
-
+        {% if translated_text and filename %}
+        <div class="audio-button">
+            <audio controls hidden>
+                <source src="{{ audio_url }}" type="audio/wav">
+            </audio>
+            <button type="button" onclick="document.querySelector('audio').play()" class="text-to-speech-button">Text to Speech</button>
+        </div>
+    {% endif %}
+     
     </form>
 {% endblock %}

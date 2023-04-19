@@ -1,55 +1,98 @@
-form {
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    }
+    
+    form {
     display: flex;
     flex-direction: column;
     margin: 20px auto;
     max-width: 600px;
-}
-
-label {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+    }
+    
+    label {
     font-weight: bold;
     margin-top: 10px;
-}
-
-textarea {
+    display: block;
+    }
+    
+    textarea {
     margin-bottom: 10px;
-}
-
-h1 {
+    height: 200px;
+    resize: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    }
+    
+    h1 {
     text-align: center;
-  }
-  
-select {
+    margin-top: 0;
+    }
+    
+    select {
     margin-bottom: 10px;
-}
-
-input[type="submit"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    }
+    
+    input[type="submit"] {
     margin: 20px 0;
-    background-color: #008CBA;
-    color: white;
+    background-color: #4285f4;
+    color: #fff;
     font-weight: bold;
     border: none;
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
-}
-
-button[type="submit"] {
-    background-color: #008CBA;
-    color: white;
+    transition: background-color 0.3s ease;
+    }
+    
+    input[type="submit"]:hover {
+    background-color: #357ae8;
+    }
+    
+    button[type="submit"] {
+    background-color: #4285f4;
+    color: #fff;
     font-weight: bold;
     border: none;
     border-radius: 5px;
     padding: 10px;
     margin-top: 10px;
     cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #005f77;
-}
-
-textarea[readonly] {
+    transition: background-color 0.3s ease;
+    }
+    
+    button[type="submit"]:hover {
+    background-color: #357ae8;
+    }
+    
+    textarea[readonly] {
     background-color: #f0f0f0;
     color: #444444;
     cursor: not-allowed;
-}
+    }
+    
+    .text-to-speech-button {
+    background-color: #4285f4;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+    
+    .text-to-speech-button:hover {
+    background-color: #357ae8;
+    }
